@@ -164,4 +164,5 @@ cython_debug/
 .vscode/
 
 *.gz
+session-3/archive/
 session-5/data/
