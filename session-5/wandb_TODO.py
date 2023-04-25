@@ -36,13 +36,14 @@ class WandbLogger(Logger):
     ):
 
         # TODO: Log train reconstruction loss to wandb
-
+        wandb.log({"Train Reconstruction Loss": train_loss_avg}, step=epoch)
 
         # TODO: Log validation reconstruction loss to wandb
-
+        wandb.log({"Validation Reconstruction Loss": val_loss_avg}, step=epoch)
 
         # TODO: Log a batch of reconstructed images from the validation set
-
+        if reconstruction_grid is not None:
+            wandb.log({"Reconstruction Grid": wandb.Image(reconstruction_grid)}, step=epoch)
 
         pass
 
@@ -57,23 +58,23 @@ class WandbLogger(Logger):
         fig: plt.Figure,
     ):
         # TODO: Log confusion matrix figure to wandb
-
+        wandb.log({"Confusion Matrix": wandb.Image(fig)}, step=epoch)
 
         # TODO: Log validation loss to wandb
         #  Tip: use the tag 'Classification/val_loss'
-
+        wandb.log({"Classification/val_loss": val_loss_avg}, step=epoch)
 
         # TODO: Log validation accuracy to wandb
         #  Tip: use the tag 'Classification/val_acc'
-
+        wandb.log({"Classification/val_acc": val_acc_avg}, step=epoch)
 
         # TODO: Log training loss to wandb
         #  Tip: use the tag 'Classification/train_loss'
-
+        wandb.log({"Classification/train_loss": train_loss_avg}, step=epoch)
 
         # TODO: Log train accuracy to wandb
         #  Tip: use the tag 'Classification/train_acc'
-
+        wandb.log({"Classification/train_acc": train_acc_avg}, step=epoch)
 
         pass
 
@@ -104,8 +105,10 @@ class WandbLogger(Logger):
         embeddings = pd.concat(list_dfs, ignore_index=True)
 
         # TODO: Log latent representations (embeddings)
-
-
+        table = wandb.Table(data=embeddings.values.tolist(), columns=embeddings.columns.tolist())
+        
+        wandb.log({'embeddings': table})
+        
     def log_model_graph(
         self,
         model: nn.Module,
