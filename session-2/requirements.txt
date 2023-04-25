@@ -1,5 +1,7 @@
 matplotlib
+pandas
 numpy
 Pillow
 torch
+torchvision
 ray

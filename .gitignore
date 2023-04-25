@@ -129,6 +129,10 @@ ENV/
 env.bak/
 venv.bak/
 
+# Path files
+*.pth
+*.pt
+
 # Spyder project settings
 .spyderproject
 .spyproject
@@ -164,7 +168,8 @@ cython_debug/
 .vscode/
 
 *.gz
+session-2/data/
+session-2/chinese_mnist*
 session-3/archive/
 session-4/data/
-session-4/app/state_dict.pt
 session-5/data/
